@@ -145,7 +145,7 @@ const main = async () => {
 
     // 创建输出目录
     createDir(path.join(outputDir, 'province'));
-    createDir(path.join(outputDir, 'citys'));
+    createDir(path.join(outputDir, 'city'));
     createDir(path.join(outputDir, 'county'));
 
     // 获取地区信息
@@ -183,7 +183,7 @@ const main = async () => {
     // 下载全国地图
     const chinaInfo = areaInfos['100000'];
     await downloadJson(
-        `${baseUrl}100000.json`,
+        `${baseUrl}100000_full.json`,
         path.join(outputDir, getFileName('100000', chinaInfo)),
         chinaInfo
     );
@@ -220,7 +220,7 @@ const main = async () => {
 
             // 下载省级地图
             await downloadJson(
-                `${baseUrl}${provinceCode}.json`,
+                `${baseUrl}${provinceCode}_full.json`,
                 path.join(outputDir, 'province', getFileName(provinceCode, info)),
                 info,
                 progressBar,
@@ -230,8 +230,8 @@ const main = async () => {
             // 下载市级地图
             for (const [cityCode, cityInfo] of cities) {
                 await downloadJson(
-                    `${baseUrl}${cityCode}.json`,
-                    path.join(outputDir, 'citys', getFileName(cityCode, cityInfo)),
+                    `${baseUrl}${cityCode}_full.json`,
+                    path.join(outputDir, 'city', getFileName(cityCode, cityInfo)),
                     cityInfo,
                     progressBar,
                     `市级: ${cityInfo.name}`
